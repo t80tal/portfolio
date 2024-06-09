@@ -17,6 +17,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Set tests environment
+        run: source .env.test
       - name: Test
         run: docker-compose run --rm api sh -c "python /wait_for_service.py postgres 5432 && python manage.py test"
       - name: Lint
