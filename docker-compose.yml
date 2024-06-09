@@ -9,7 +9,9 @@ services:
     volumes:
       - ./api:/api
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python /wait_for_service.py postgres 5432 &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     env_file:
       - .env
     depends_on:
