@@ -10,3 +10,19 @@ services:
       - ./api:/api
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16.3-alpine3.20
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+volumes:
+  postgres_data:
