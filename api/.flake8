@@ -1,2 +1,2 @@
 [flake8]
-exclude = manage.py, settings.py, migrations, __pycache__
+exclude = manage.py, settings.py, migrations, __pycache__, wsgi.py
