@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models.base import BaseModel
 from .serializers import get_model_serializer
 
+
 def get_urls(model: Type[BaseModel]) -> list[URLPattern | URLResolver]:
     """
     Generate a list of URL patterns for a given model.
@@ -19,16 +20,19 @@ def get_urls(model: Type[BaseModel]) -> list[URLPattern | URLResolver]:
         serializer_class = model_serializer
 
         def get_permissions(self):
-                """
-                Instantiates and returns the list of permissions that this view requires.
-                """
-                if self.request.method == 'POST':
-                    self.permission_classes = [IsAuthenticated]
-                return super().get_permissions()
+            """
+            Instantiates and returns the list of permissions that this view requires.
+            """
+            if self.request.method == 'POST':
+                self.permission_classes = [IsAuthenticated]
+            return super().get_permissions()
 
     router = SimpleRouter()
     router.register(url_path_segment, ModelViewSet)
 
     return router.urls
 
-urls = [url for model in BaseModel.__subclasses__() for url in get_urls(cast(Type[BaseModel], model))]
+urls = [
+    url for model in BaseModel.__subclasses__() 
+    for url in get_urls(cast(Type[BaseModel], model))
+]
