@@ -7,8 +7,8 @@ from .models.base import BaseModel
 
 
 def get_model_serializer(
-    data_model: Type[BaseModel], 
-    model_fields: list[str] | str | None = None, 
+    data_model: Type[BaseModel],
+    model_fields: list[str] | str | None = None,
     name_suffix: str | None = None
 ) -> Type[serializers.ModelSerializer]:
     """
@@ -29,14 +29,14 @@ def get_model_serializer(
             for field_name, field in self.fields.items():
                 model_field = data_model._meta.get_field(field_name)
                 is_nullable = (getattr(model_field, "null", False) and
-                            getattr(model_field, "blank", False))
+                                getattr(model_field, "blank", False))
                 if is_nullable:
                     field.required = False
                     field.allow_null = True
                 default_value = getattr(model_field, "default", None)
                 if default_value and default_value != NOT_PROVIDED:
-                    field.default = (default_value() if callable(default_value) 
-                                    else default_value)
+                    field.default = (default_value() if callable(default_value)
+                                        else default_value)
                     field.required = False
 
             ModelSerializer.__name__ = (

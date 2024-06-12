@@ -21,7 +21,7 @@ def get_urls(model: Type[BaseModel]) -> list[URLPattern | URLResolver]:
 
         def get_permissions(self):
             """
-            Instantiates and returns the list of permissions that this view requires.
+            Instantiates and returns the list of permissions.
             """
             if self.request.method == 'POST':
                 self.permission_classes = [IsAuthenticated]
@@ -32,7 +32,8 @@ def get_urls(model: Type[BaseModel]) -> list[URLPattern | URLResolver]:
 
     return router.urls
 
+
 urls = [
-    url for model in BaseModel.__subclasses__() 
+    url for model in BaseModel.__subclasses__()
     for url in get_urls(cast(Type[BaseModel], model))
 ]
