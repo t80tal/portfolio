@@ -11,7 +11,7 @@ def wait_for_service(host, port, timeout=30):
         try:
             with socket.create_connection((host, port), timeout=1):
                 return True
-        except:
+        except Exception:
             pass
         if time.time() - start_time > timeout:
             print(f"Timeout occurred after {timeout} seconds")
