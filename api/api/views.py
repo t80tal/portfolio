@@ -22,13 +22,13 @@ def get_urls(model: Type[BaseModel]) -> list[URLPattern | URLResolver]:
         def get_permissions(self):
             """
             Instantiates and returns the list of permissions.
-            """
-            if self.request.method == 'POST':
+            # """
+            if not self.request.method == 'GET':
                 self.permission_classes = [IsAuthenticated]
             return super().get_permissions()
 
     router = SimpleRouter()
-    router.register(url_path_segment, ModelViewSet)
+    router.register(url_path_segment, ModelViewSet, basename=url_path_segment)
 
     return router.urls
 
