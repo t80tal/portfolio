@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements-dev.txt /tmp/requirements-dev.txt
 COPY ./wait_for_service.py /wait_for_service.py
-COPY ./api /api
+COPY . /api
 WORKDIR /api
 EXPOSE 8000
 ARG ENV=development

@@ -1,7 +1,7 @@
 services:
   api:
     build:
-      context: .
+      context: ./api
       args:
         - ENV=development
     ports:
@@ -25,6 +25,13 @@ services:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+  web:
+    build: ./web
+    ports:
+      - '3000:3000'
+    command: >
+      sh -c "npm start"
 
 volumes:
   postgres_data:
