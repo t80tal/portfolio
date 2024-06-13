@@ -23,7 +23,7 @@ def get_urls(model: Type[BaseModel]) -> list[URLPattern | URLResolver]:
             """
             Instantiates and returns the list of permissions.
             """
-            if self.request.method == 'POST':
+            if not self.request.method == 'GET':
                 self.permission_classes = [IsAuthenticated]
             return super().get_permissions()
 
