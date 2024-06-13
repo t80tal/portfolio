@@ -28,7 +28,7 @@ def get_urls(model: Type[BaseModel]) -> list[URLPattern | URLResolver]:
             return super().get_permissions()
 
     router = SimpleRouter()
-    router.register(url_path_segment, ModelViewSet, basename=url_path_segment)
+    router.register(url_path_segment, ModelViewSet)
 
     return router.urls
 
