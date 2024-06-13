@@ -4,7 +4,6 @@ LABEL maintainer="https://github.com/t80tal"
 ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements-dev.txt /tmp/requirements-dev.txt
-COPY ./wait_for_service.py /wait_for_service.py
 COPY . /api
 WORKDIR /api
 EXPOSE 8000
