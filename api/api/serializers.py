@@ -1,5 +1,4 @@
 from typing import Type
-from django.db.models import NOT_PROVIDED
 from rest_framework import serializers
 
 from .models.base import BaseModel
